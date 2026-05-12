@@ -1,9 +1,9 @@
 # ignored files
-*.github
-*.idea
-*.vscode
-*.settings
-*.vs
+.github
+.idea
+.vscode
+.settings
+.vs
 
 # Compiled class file
 *.class
