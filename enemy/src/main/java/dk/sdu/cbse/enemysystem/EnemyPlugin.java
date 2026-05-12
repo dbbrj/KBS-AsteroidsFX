@@ -21,6 +21,7 @@ public class EnemyPlugin implements IGamePluginService {
         e.setX(gameData.getDisplayWidth() * 0.75);
         e.setY(gameData.getDisplayHeight() * 0.25);
         e.setRadius(8);
+        e.setHealth(3); // 3 hits to destroy
         return e;
     }
 

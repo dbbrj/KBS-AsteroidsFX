@@ -10,10 +10,15 @@ import dk.sdu.cbse.common.services.IGamePluginService;
 
 public class AsteroidPlugin implements IGamePluginService {
 
+    private final Random rnd = new Random();
+
     @Override
     public void start(GameData gameData, World world) {
-        Entity asteroid = createAsteroid(gameData);
-        world.addEntity(asteroid);
+        int count = rnd.nextInt(5) + 5; // Spawn between 5 and 10 asteroids
+        for (int i = 0; i < count; i++) {
+            Entity asteroid = createAsteroid(gameData);
+            world.addEntity(asteroid);
+        }
     }
 
     @Override
@@ -26,13 +31,13 @@ public class AsteroidPlugin implements IGamePluginService {
 
     private Entity createAsteroid(GameData gameData) {
         Entity asteroid = new Asteroid();
-        Random rnd = new Random();
         int size = rnd.nextInt(10) + 5;
         asteroid.setPolygonCoordinates(size, -size, -size, -size, -size, size, size, size);
-        asteroid.setX(0);
-        asteroid.setY(0);
+        asteroid.setX(rnd.nextInt(gameData.getDisplayWidth()));
+        asteroid.setY(rnd.nextInt(gameData.getDisplayHeight()));
         asteroid.setRadius(size);
-        asteroid.setRotation(rnd.nextInt(90));
+        asteroid.setRotation(rnd.nextInt(360));
+        asteroid.setHealth(1); // 1 hit to split/destroy
         return asteroid;
     }    
 }
