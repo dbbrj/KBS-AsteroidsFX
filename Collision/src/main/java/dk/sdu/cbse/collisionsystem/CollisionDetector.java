@@ -1,6 +1,7 @@
 package dk.sdu.cbse.collisionsystem;
 
 import java.util.ServiceLoader;
+
 import dk.sdu.cbse.common.asteroids.Asteroid;
 import dk.sdu.cbse.common.asteroids.IAsteroidSplitter;
 import dk.sdu.cbse.common.bullet.Bullet;
@@ -13,17 +14,14 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        outer:
         for (Entity entity1 : world.getEntities()) {
             for (Entity entity2 : world.getEntities()) {
 
-                if (entity1.getID().equals(entity2.getID())) {
-                    continue;
-                }
-
-                if (!collides(entity1, entity2)) {
-                    continue;
-                }
-
+                if (entity1.getID().equals(entity2.getID())) continue;
+                if (entity1.getClass().equals(entity2.getClass())) continue;
+                if (!collides(entity1, entity2)) continue;
+                
                 // Bullet hits asteroid
                 if (entity1 instanceof Bullet && entity2 instanceof Asteroid) {
                     world.removeEntity(entity1); // remove bullet
@@ -34,7 +32,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                         getAsteroidSplitter().createSplitAsteroid(entity2, world);
                     }
                 }
-
+                
                 // Asteroid hits bullet (reverse)
                 else if (entity2 instanceof Bullet && entity1 instanceof Asteroid) {
                     world.removeEntity(entity2);
@@ -60,6 +58,8 @@ public class CollisionDetector implements IPostEntityProcessingService {
                         world.removeEntity(ship);
                     }
                 }
+
+                continue outer; // only handle one collision per entity per frame
             }
         }
     }
