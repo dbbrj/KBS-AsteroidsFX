@@ -1,9 +1,8 @@
 package dk.sdu.cbse.asteroid;
 
-import java.util.ServiceLoader;
+import java.util.List;
 
 import dk.sdu.cbse.common.asteroids.Asteroid;
-import dk.sdu.cbse.common.asteroids.IAsteroidSplitter;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
@@ -11,15 +10,11 @@ import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 public class AsteroidProcessor implements IEntityProcessingService {
 
-    private IAsteroidSplitter asteroidSplitter = ServiceLoader
-            .load(IAsteroidSplitter.class)
-            .findFirst()
-            .orElse(null);
-
     @Override
     public void process(GameData gameData, World world) {
+        List<Entity> asteroids = world.getEntities(Asteroid.class);
 
-        for (Entity asteroid : world.getEntities(Asteroid.class)) {
+        for (Entity asteroid : asteroids) {
             double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
             double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
 
@@ -44,11 +39,4 @@ public class AsteroidProcessor implements IEntityProcessingService {
         }
     }
 
-    public void setAsteroidSplitter(IAsteroidSplitter asteroidSplitter) {
-        this.asteroidSplitter = asteroidSplitter;
-    }
-
-    public void removeAsteroidSplitter(IAsteroidSplitter asteroidSplitter) {
-        this.asteroidSplitter = null;
-    }
 }
