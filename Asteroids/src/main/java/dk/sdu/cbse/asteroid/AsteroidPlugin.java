@@ -4,6 +4,7 @@ import java.util.Random;
 
 import dk.sdu.cbse.common.asteroids.Asteroid;
 import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.EntityType;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IGamePluginService;
@@ -38,6 +39,7 @@ public class AsteroidPlugin implements IGamePluginService {
         asteroid.setRadius(size);
         asteroid.setRotation(rnd.nextInt(360));
         asteroid.setHealth(1); // 1 hit to split/destroy
+        asteroid.setType(EntityType.ASTEROID);
         return asteroid;
     }    
 }

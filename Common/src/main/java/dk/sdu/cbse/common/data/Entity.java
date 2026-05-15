@@ -12,6 +12,7 @@ public class Entity implements Serializable{
     private double rotation;
     private float radius;
     private int health = 1; // default 1 hitpoint
+    private EntityType type;
 
     public String getID() {
         return ID.toString();
@@ -63,5 +64,13 @@ public class Entity implements Serializable{
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public EntityType getType() {
+        return type;
+    }
+
+    public void setType(EntityType type) {
+        this.type = type;
     }
 }

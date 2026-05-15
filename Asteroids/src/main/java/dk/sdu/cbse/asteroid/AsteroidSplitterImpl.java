@@ -3,6 +3,7 @@ package dk.sdu.cbse.asteroid;
 import dk.sdu.cbse.common.asteroids.Asteroid;
 import dk.sdu.cbse.common.asteroids.IAsteroidSplitter;
 import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.EntityType;
 import dk.sdu.cbse.common.data.World;
 
 public class AsteroidSplitterImpl implements IAsteroidSplitter {
@@ -39,6 +40,7 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
             splitAsteroid.setRadius(newSize);
             splitAsteroid.setRotation(rotation);
             splitAsteroid.setHealth(1); // 1 hit to split/destroy
+            splitAsteroid.setType(EntityType.ASTEROID);
             world.addEntity(splitAsteroid);
         }
     }   

@@ -20,6 +20,7 @@
         <module>CommonAsteroids</module>
         <module>Asteroids</module>
         <module>Collision</module>
+        <module>Scoring</module>
     </modules>
 
     <properties>
@@ -115,7 +116,7 @@
                 </executions>
                 <configuration>
                     <executable>java</executable>
-                    <workingDirectory>.</workingDirectory>
+                    <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
                     <arguments>
                         <argument>--module-path=mods-mvn</argument>
                         <argument>--class-path=libs/*</argument>

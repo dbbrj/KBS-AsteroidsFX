@@ -4,6 +4,8 @@ module Collision {
     requires Common;
     requires CommonAsteroids;
     requires CommonBullet;
+    requires spring.web;
+    requires spring.core;
 
     uses dk.sdu.cbse.common.asteroids.IAsteroidSplitter;
 

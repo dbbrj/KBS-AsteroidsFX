@@ -24,6 +24,9 @@ public class Game {
     private final World world = new World();
     private final Map<Entity, Polygon> polygons = new ConcurrentHashMap<>();
     private final Pane gameWindow = new Pane();
+    private final Text asteroidText = new Text(10, 20, "Asteroids destroyed: 0");
+    private final Text enemyText    = new Text(10, 40, "Enemies destroyed: 0");
+    private final Text scoreText    = new Text(10, 60, "Total score: 0");
     private final List<IGamePluginService> gamePluginServices;
     private final List<IEntityProcessingService> entityProcessingServiceList;
     private final List<IPostEntityProcessingService> postEntityProcessingServices;
@@ -35,9 +38,8 @@ public class Game {
 }
 
 public void start(Stage window) throws Exception {
-        Text text = new Text(10, 20, "Destroyed asteroids: 0");
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        gameWindow.getChildren().add(text);
+        gameWindow.getChildren().addAll(asteroidText, enemyText, scoreText);
 
         Scene scene = new Scene(gameWindow);
         scene.setOnKeyPressed(event -> {
@@ -106,6 +108,10 @@ public void start(Stage window) throws Exception {
     }
 
     private void draw() {
+        asteroidText.setText("Asteroids destroyed: " + gameData.getAsteroidsDestroyed());
+        enemyText.setText("Enemies destroyed: "    + gameData.getEnemiesDestroyed());
+        scoreText.setText("Total score: "          + gameData.getTotalScore());
+
         for (Entity polygonEntity : polygons.keySet()) {
             if (!world.getEntities().contains(polygonEntity)) {
                 Polygon removedPolygon = polygons.get(polygonEntity);

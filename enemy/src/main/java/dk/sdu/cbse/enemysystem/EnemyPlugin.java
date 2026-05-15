@@ -1,6 +1,7 @@
 package dk.sdu.cbse.enemysystem;
 
 import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.EntityType;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IGamePluginService;
@@ -22,6 +23,7 @@ public class EnemyPlugin implements IGamePluginService {
         e.setY(gameData.getDisplayHeight() * 0.25);
         e.setRadius(8);
         e.setHealth(3); // 3 hits to destroy
+        e.setType(EntityType.ENEMY);
         return e;
     }
 
